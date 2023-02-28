@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const routeStudents = require('./routes/students');
+const { swaggerDocs: V1SwaggerDocs } = require('./swagger');
 
 // * Servidor
 const app = express();
@@ -19,6 +20,10 @@ app.get('/', (req, res) => {
     res.send('<h2 style="text-align:center">Bienvenido al Api Rest con Node JS sin DB</h2>');
 });
 
+
 app.use('/api/students', routeStudents());
 
-app.listen(app.get('port'), () => console.log(`Escuchando en puerto ${app.get('port')}...`));
+app.listen(app.get('port'), () => {
+    console.log(`Escuchando en puerto ${app.get('port')}...`);
+    V1SwaggerDocs(app, app.get('port'));
+});

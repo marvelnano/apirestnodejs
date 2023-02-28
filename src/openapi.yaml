@@ -1,0 +1,176 @@
+openapi: 3.0.3
+info:
+  title: API REST Estudiantes
+  description: API REST Estudiantes
+  contact:
+    email: apiteam@swagger.io
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api-docs
+tags:
+  - name: estudiantes
+    description: Everything about your Students
+
+paths:
+  /listar:
+    get:
+      tags:
+      - estudiantes
+      summary: Lista todos los estudiantes
+      responses:
+        200:
+          description: Listados Correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/ExitoListarEstudiantes'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError' 
+  
+  /registrar:
+    post:
+      tags:
+      - estudiantes
+      summary: Registra nuevo estudiante
+      parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/name'
+      - $ref: '#/components/parameters/age'
+      - $ref: '#/components/parameters/enroll'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        200:
+          description: Listados Correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/ExitoRegistrarEstudiantes'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+
+components:
+  responses:
+    BadRequest:
+      description: (BadRequest) los datos enviados son incorrectos o hay datos obligatorios no enviados
+      
+    Unauthorized:
+      description: (Unauthorized) no hay autorización para llamar el servicio
+      
+    NotFound:
+      description: (NotFound) no se encontró la información
+    
+    ServerError:
+      description: (ServerError) Error en el servidor
+      
+  parameters:
+    id:
+      name: id
+      in: id
+      description: el id del estudiante
+      required: true
+    name:
+      name: name
+      in: name
+      description: nombre del estudiante
+      required: true
+    age: 
+      name: age
+      in: age
+      description: edad del estudiante
+      required: true
+    enroll:
+      name: enroll
+      in: enroll
+      description: estado del estudiante
+      required: true
+  
+  schemas:
+    Student:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: el id del estudiante
+        name:
+          type: string
+          description: nombre del estudiante
+        age: 
+          type: integer
+          description: edad del estudiante
+        enroll:
+          type: string
+          description: estado del estudiante
+      required:
+        - id
+        - name
+        - age
+        - enroll
+      example:
+        id: 1
+        name: Kalef
+        age: 10
+        enroll: true
+    
+    ExitoListarEstudiantes:
+      type: object
+      properties:
+        id:
+          type: integer
+          enum: [1]
+          description: el id del estudiante
+        name:
+          type: string
+          enum: ['gael']
+          description: nombre del estudiante
+        age: 
+          type: integer
+          enum: [3]
+          description: edad del estudiante
+        enroll:
+          type: string
+          enum: ['true']
+          description: estado del estudiante
+        
+    ExitoRegistrarEstudiantes:
+      type: object
+      properties:
+        respuesta:
+          type: integer
+          enum: [1]
+          description: Bandera que nos indica si llamada al servicio fue exitosa
+        id:
+          type: integer
+          enum: [1]
+          description: el id del estudiante
+        name:
+          type: string
+          enum: ['gael']
+          description: nombre del estudiante
+        age: 
+          type: integer
+          enum: [3]
+          description: edad del estudiante
+        enroll:
+          type: string
+          enum: ['true']
+          description: estado del estudiante
