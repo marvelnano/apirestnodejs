@@ -1,0 +1,243 @@
+openapi: 3.0.3
+info:
+  title: API REST Estudiantes
+  description: API REST Estudiantes
+  contact:
+    name: 'JV Developer'
+    email: jv@email.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/students
+tags:
+  - name: estudiantes
+    description: Everything about your Students
+paths:
+  /listar:
+    get:
+      tags:
+        - estudiantes
+      summary: Lista todos los estudiantes
+      description: Lista todos los estudiantes
+      responses:
+        '200':
+          description: Listados Correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoListarEstudiantes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /registrar:
+    post:
+      tags:
+        - estudiantes
+      summary: Registra nuevo estudiante
+      description: Create a new student
+      operationId: addStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        '200':
+          description: Listados Correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoRegistrarEstudiantes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /{id}:
+    get:
+      tags:
+        - estudiantes
+      summary: Buscar estudiante según su ID
+      description: Buscar estudiante según su ID
+      operationId: findStudentById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El id del estudiante
+      responses:
+        '200':
+          description: Listados Correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoListarEstudiantes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags:
+        - estudiantes
+      summary: Actualizar estudiante según su ID
+      description: Actualizar datos del estudiante según su ID
+      operationId: updateStudentById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El id del estudiante
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        '200':
+          description: Listados Correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoListarEstudiantes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+        - estudiantes
+      summary: Eliminar estudiante según su ID
+      description: Eliminar datos del estudiante según su ID
+      operationId: deleteStudentById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El id del estudiante
+      responses:
+        '200':
+          description: Listados Correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoListarEstudiantes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  responses:
+    BadRequest:
+      description: >-
+        (BadRequest) los datos enviados son incorrectos o hay datos obligatorios
+        no enviados
+    Unauthorized:
+      description: (Unauthorized) no hay autorización para llamar el servicio
+    NotFound:
+      description: (NotFound) no se encontró la información
+    ServerError:
+      description: (ServerError) Error en el servidor
+  schemas:
+    Student:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: el id del estudiante
+        name:
+          type: string
+          description: nombre del estudiante
+        age:
+          type: integer
+          description: edad del estudiante
+        enroll:
+          type: string
+          description: estado del estudiante
+      required:
+        - id
+        - name
+        - age
+        - enroll
+      example:
+        id: 1
+        name: Kalef
+        age: 10
+        enroll: true
+    ExitoListarEstudiantes:
+      type: object
+      properties:
+        id:
+          type: integer
+          enum:
+            - 1
+          description: el id del estudiante
+        name:
+          type: string
+          enum:
+            - gael
+          description: nombre del estudiante
+        age:
+          type: integer
+          enum:
+            - 3
+          description: edad del estudiante
+        enroll:
+          type: string
+          enum:
+            - 'true'
+          description: estado del estudiante
+    ExitoRegistrarEstudiantes:
+      type: object
+      properties:
+        respuesta:
+          type: integer
+          enum:
+            - 1
+          description: Bandera que nos indica si llamada al servicio fue exitosa
+        id:
+          type: integer
+          enum:
+            - 1
+          description: el id del estudiante
+        name:
+          type: string
+          enum:
+            - gael
+          description: nombre del estudiante
+        age:
+          type: integer
+          enum:
+            - 3
+          description: edad del estudiante
+        enroll:
+          type: string
+          enum:
+            - 'true'
+          description: estado del estudiante

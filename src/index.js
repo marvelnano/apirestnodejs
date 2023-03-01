@@ -1,7 +1,8 @@
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
-const routeStudents = require('./routes/students');
-const { swaggerDocs: V1SwaggerDocs } = require('./swagger');
+const routeStudents = require('./v1/routes/students');
+const { swaggerDocs: V1SwaggerDocs } = require('./v1/swagger/swaggerV2');
 
 // * Servidor
 const app = express();
@@ -14,6 +15,9 @@ app.set('json spaces', 2);
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+//var whitelist = ['https://editor.swagger.io/', 'http://example2.com']
+app.use(cors());
 
 // * Rutas del app
 app.get('/', (req, res) => {
