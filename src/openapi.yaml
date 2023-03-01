@@ -15,7 +15,7 @@ paths:
   /listar:
     get:
       tags:
-      - estudiantes
+        - estudiantes
       summary: Lista todos los estudiantes
       responses:
         200:
@@ -23,7 +23,6 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 $ref: '#/components/schemas/ExitoListarEstudiantes'
         400:
           $ref: '#/components/responses/BadRequest'
@@ -37,18 +36,37 @@ paths:
   /registrar:
     post:
       tags:
-      - estudiantes
+        - estudiantes
       summary: Registra nuevo estudiante
       parameters:
-      - $ref: '#/components/parameters/id'
-      - $ref: '#/components/parameters/name'
-      - $ref: '#/components/parameters/age'
-      - $ref: '#/components/parameters/enroll'
+        - name: studentId
+          in: query
+          description: ID of student to create
+          required: true
+          schema:
+            type: integer
+        - name: studentName
+          in: query
+          description: Name of student to create
+          required: true
+          schema:
+            type: string
+        - name: studentAge
+          in: query
+          description: Age of student to create
+          required: true
+          schema:
+            type: integer
+        - name: studentEnroll
+          in: query
+          description: Enroll of student to create
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              type: object
               $ref: '#/components/schemas/Student'
         required: true
       responses:
@@ -57,7 +75,6 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 $ref: '#/components/schemas/ExitoRegistrarEstudiantes'
         400:
           $ref: '#/components/responses/BadRequest'
@@ -81,29 +98,7 @@ components:
     
     ServerError:
       description: (ServerError) Error en el servidor
-      
-  parameters:
-    id:
-      name: id
-      in: id
-      description: el id del estudiante
-      required: true
-    name:
-      name: name
-      in: name
-      description: nombre del estudiante
-      required: true
-    age: 
-      name: age
-      in: age
-      description: edad del estudiante
-      required: true
-    enroll:
-      name: enroll
-      in: enroll
-      description: estado del estudiante
-      required: true
-  
+
   schemas:
     Student:
       type: object
