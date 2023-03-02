@@ -24,7 +24,7 @@ servers:
           - '3000'
           - '3001'
       basePath:
-        default: v1
+        default: v3
         enum:
           - v1
           - v2

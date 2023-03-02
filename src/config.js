@@ -9,5 +9,9 @@ module.exports = {
     NODE_ENV: process.env.NODE_ENV || 'development',
     HOST: process.env.HOST || '127.0.0.1',
     PORT: process.env.PORT || 3000,
-    VERSION: 'v1'
+    VERSION: 'v3',
+    db_host: process.env.DB_HOST || "",
+    db_database: process.env.DB_DATABASE || "",
+    db_user: process.env.DB_USERNAME || "",
+    db_password: process.env.DB_PASSWORD || ""
 }

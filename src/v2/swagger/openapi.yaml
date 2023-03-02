@@ -24,10 +24,11 @@ servers:
           - '3000'
           - '3001'
       basePath:
-        default: v1
+        default: v2
         enum:
           - v1
           - v2
+          - v3
 tags:
   - name: estudiantes
     description: CRUD de estudiantes
@@ -211,9 +212,6 @@ components:
     Student:
       type: object
       properties:
-        id:
-          type: integer
-          description: el id del estudiante
         name:
           type: string
           description: nombre del estudiante
@@ -224,15 +222,13 @@ components:
           type: string
           description: estado del estudiante
       required:
-        - id
         - name
         - age
         - enroll
       example:
-        id: 1
         name: Kalef
         age: 10
-        enroll: true
+        enroll: 'true'     
     ExitoListarEstudiantes:
       type: object
       properties:

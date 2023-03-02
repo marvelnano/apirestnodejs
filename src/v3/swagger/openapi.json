@@ -32,7 +32,7 @@
           ]
         },
         "basePath": {
-          "default": "v1",
+          "default": "v3",
           "enum": [
             "v1",
             "v2",

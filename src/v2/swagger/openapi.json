@@ -32,10 +32,11 @@
           ]
         },
         "basePath": {
-          "default": "v1",
+          "default": "v2",
           "enum": [
             "v1",
-            "v2"
+            "v2",
+            "v3"
           ]
         }
       }
@@ -323,10 +324,6 @@
       "Student": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "description": "el id del estudiante"
-          },
           "name": {
             "type": "string",
             "description": "nombre del estudiante"
@@ -341,16 +338,14 @@
           }
         },
         "required": [
-          "id",
           "name",
           "age",
           "enroll"
         ],
         "example": {
-          "id": 1,
           "name": "Kalef",
           "age": 10,
-          "enroll": true
+          "enroll": "true"
         }
       },
       "ExitoListarEstudiantes": {

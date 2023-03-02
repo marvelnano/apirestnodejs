@@ -23,7 +23,7 @@ app.use(cors());
 
 // * Rutas del app
 app.get('/', (req, res) => {
-    res.send('<h2 style="text-align:center">Bienvenido al Api Rest con Node JS sin DB</h2>');
+    res.send('<h2 style="text-align:center">Bienvenido al Api Rest con Node JS</h2>');
 });
 
 
