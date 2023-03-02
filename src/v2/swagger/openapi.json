@@ -3,18 +3,42 @@
   "info": {
     "title": "API REST con Node JS",
     "description": "Documentación de API REST con Node JS",
+    "version": "1.0.0",
     "contact": {
       "name": "JV Developer",
       "email": "jv@email.com"
-    },
-    "version": "1.0.0"
+    }
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api/v2"
-    },
-    {
-      "url": "http://localhost:3000/api/v1"
+      "url": "http://{host}:{port}/api/{basePath}",
+      "description": "NodeJS",
+      "variables": {
+        "host": {
+          "default": "localhost",
+          "description": "Development server, Staging server, Production server example.com",
+          "enum": [
+            "localhost",
+            "development",
+            "staging",
+            "api"
+          ]
+        },
+        "port": {
+          "default": "3000",
+          "enum": [
+            "3000",
+            "3001"
+          ]
+        },
+        "basePath": {
+          "default": "v1",
+          "enum": [
+            "v1",
+            "v2"
+          ]
+        }
+      }
     }
   ],
   "tags": [
@@ -23,7 +47,7 @@
       "description": "CRUD de estudiantes"
     },
     {
-      "name": "categories",
+      "name": "categorias",
       "description": "CRUD de categorías"
     }
   ],
@@ -249,7 +273,7 @@
     "/categories/list": {
       "get": {
         "tags": [
-          "categories"
+          "categorias"
         ],
         "summary": "Lista todas las categorías",
         "description": "Lista todas las categorías",

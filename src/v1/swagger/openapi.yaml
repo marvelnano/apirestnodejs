@@ -7,10 +7,10 @@ info:
     name: JV Developer
     email: jv@email.com
 servers:
-  - url: http://{username}:{port}/api/{basePath}
+  - url: http://{host}:{port}/api/{basePath}
     description: NodeJS
     variables:
-      username:
+      host:
         default: localhost
         description: Development server, Staging server, Production server example.com
         enum:

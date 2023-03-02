@@ -2,23 +2,42 @@ openapi: 3.0.3
 info:
   title: API REST con Node JS
   description: Documentación de API REST con Node JS
+  version: 1.0.0
   contact:
     name: JV Developer
     email: jv@email.com
-  version: 1.0.0
 servers:
-  - url: http://localhost:3000/api/v2
-  - url: http://localhost:3000/api/v1
+  - url: http://{host}:{port}/api/{basePath}
+    description: NodeJS
+    variables:
+      host:
+        default: localhost
+        description: Development server, Staging server, Production server example.com
+        enum:
+          - localhost
+          - development
+          - staging
+          - api
+      port:
+        default: '3000'
+        enum:
+          - '3000'
+          - '3001'
+      basePath:
+        default: v1
+        enum:
+          - v1
+          - v2
 tags:
   - name: estudiantes
     description: CRUD de estudiantes
-  - name: categories
+  - name: categorias
     description: CRUD de categorías
 paths:
   /students/listar:
     get:
       tags:
-        - "estudiantes"
+        - estudiantes
       summary: Lista todos los estudiantes
       description: Lista todos los estudiantes
       responses:
@@ -39,7 +58,7 @@ paths:
   /students/registrar:
     post:
       tags:
-        - "estudiantes"
+        - estudiantes
       summary: Registra nuevo estudiante
       description: Create a new student
       operationId: addStudent
@@ -67,7 +86,7 @@ paths:
   /students/{id}:
     get:
       tags:
-        - "estudiantes"
+        - estudiantes
       summary: Buscar estudiante según su ID
       description: Buscar estudiante según su ID
       operationId: findStudentById
@@ -95,7 +114,7 @@ paths:
           $ref: '#/components/responses/ServerError'
     put:
       tags:
-        - "estudiantes"
+        - estudiantes
       summary: Actualizar estudiante según su ID
       description: Actualizar datos del estudiante según su ID
       operationId: updateStudentById
@@ -129,7 +148,7 @@ paths:
           $ref: '#/components/responses/ServerError'
     delete:
       tags:
-        - "estudiantes"
+        - estudiantes
       summary: Eliminar estudiante según su ID
       description: Eliminar datos del estudiante según su ID
       operationId: deleteStudentById
@@ -158,7 +177,7 @@ paths:
   /categories/list:
     get:
       tags:
-        - "categories"
+        - categorias
       summary: Lista todas las categorías
       description: Lista todas las categorías
       responses:
@@ -179,7 +198,9 @@ paths:
 components:
   responses:
     BadRequest:
-      description: (BadRequest) los datos enviados son incorrectos o hay datos obligatorios no enviados
+      description: >-
+        (BadRequest) los datos enviados son incorrectos o hay datos obligatorios
+        no enviados
     Unauthorized:
       description: (Unauthorized) no hay autorización para llamar el servicio
     NotFound:
