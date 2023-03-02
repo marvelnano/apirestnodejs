@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "API REST Estudiantes",
-    "description": "API REST Estudiantes",
+    "title": "API REST con Node JS",
+    "description": "Documentación de API REST con Node JS",
     "contact": {
       "name": "JV Developer",
       "email": "jv@email.com"
@@ -12,12 +12,19 @@
   "servers": [
     {
       "url": "http://localhost:3000/api/students"
+    },
+    {
+      "url": "http://localhost:3000/api/categories"
     }
   ],
   "tags": [
     {
       "name": "estudiantes",
-      "description": "Everything about your Students"
+      "description": "CRUD de estudiantes"
+    },
+    {
+      "name": "categories",
+      "description": "CRUD de categorías"
     }
   ],
   "paths": {
