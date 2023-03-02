@@ -11,10 +11,10 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api/students"
+      "url": "http://localhost:3000/api/v2"
     },
     {
-      "url": "http://localhost:3000/api/categories"
+      "url": "http://localhost:3000/api/v1"
     }
   ],
   "tags": [
@@ -28,7 +28,7 @@
     }
   ],
   "paths": {
-    "/listar": {
+    "/students/listar": {
       "get": {
         "tags": [
           "estudiantes"
@@ -61,7 +61,7 @@
         }
       }
     },
-    "/registrar": {
+    "/students/registrar": {
       "post": {
         "tags": [
           "estudiantes"
@@ -105,7 +105,7 @@
         }
       }
     },
-    "/{id}": {
+    "/students/{id}": {
       "get": {
         "tags": [
           "estudiantes"
@@ -220,6 +220,39 @@
             "description": "El id del estudiante"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Listados Correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoListarEstudiantes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/categories/list": {
+      "get": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Lista todas las categorías",
+        "description": "Lista todas las categorías",
         "responses": {
           "200": {
             "description": "Listados Correctamente",

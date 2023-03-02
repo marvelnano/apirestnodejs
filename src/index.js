@@ -1,14 +1,16 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const routeStudents = require('./v1/routes/students');
-const { swaggerDocs: V1SwaggerDocs } = require('./v1/swagger/swaggerV2');
+const config = require('./config');
+const routeStudents = require(`./${config.VERSION}/routes/students`);
+const { swaggerDocs: SwaggerDocs } = require(`./${config.VERSION}/swagger/swaggerV2`);
 
 // * Servidor
 const app = express();
 
 // * Settings
-app.set('port', process.env.port || 3000);
+app.set('port', config.PORT);
+app.set('host', config.HOST);
 app.set('json spaces', 2);
 
 // * Middlewares
@@ -25,9 +27,11 @@ app.get('/', (req, res) => {
 });
 
 
-app.use('/api/students', routeStudents());
+console.log(`NODE_ENV = ${config.NODE_ENV}`);
+
+app.use(`/api/${config.VERSION}/students`, routeStudents());
 
 app.listen(app.get('port'), () => {
     console.log(`Escuchando en puerto ${app.get('port')}...`);
-    V1SwaggerDocs(app, app.get('port'));
+    SwaggerDocs(app, app.get('port'), app.get('host'), config.VERSION);
 });

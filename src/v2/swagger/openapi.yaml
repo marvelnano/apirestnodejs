@@ -7,18 +7,18 @@ info:
     email: jv@email.com
   version: 1.0.0
 servers:
-  - url: http://localhost:3000/api/students
-  - url: http://localhost:3000/api/categories
+  - url: http://localhost:3000/api/v2
+  - url: http://localhost:3000/api/v1
 tags:
   - name: estudiantes
     description: CRUD de estudiantes
   - name: categories
     description: CRUD de categorías
 paths:
-  /listar:
+  /students/listar:
     get:
       tags:
-        - estudiantes
+        - "estudiantes"
       summary: Lista todos los estudiantes
       description: Lista todos los estudiantes
       responses:
@@ -36,10 +36,10 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
-  /registrar:
+  /students/registrar:
     post:
       tags:
-        - estudiantes
+        - "estudiantes"
       summary: Registra nuevo estudiante
       description: Create a new student
       operationId: addStudent
@@ -64,10 +64,10 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
-  /{id}:
+  /students/{id}:
     get:
       tags:
-        - estudiantes
+        - "estudiantes"
       summary: Buscar estudiante según su ID
       description: Buscar estudiante según su ID
       operationId: findStudentById
@@ -95,7 +95,7 @@ paths:
           $ref: '#/components/responses/ServerError'
     put:
       tags:
-        - estudiantes
+        - "estudiantes"
       summary: Actualizar estudiante según su ID
       description: Actualizar datos del estudiante según su ID
       operationId: updateStudentById
@@ -129,7 +129,7 @@ paths:
           $ref: '#/components/responses/ServerError'
     delete:
       tags:
-        - estudiantes
+        - "estudiantes"
       summary: Eliminar estudiante según su ID
       description: Eliminar datos del estudiante según su ID
       operationId: deleteStudentById
@@ -140,6 +140,27 @@ paths:
             type: integer
           required: true
           description: El id del estudiante
+      responses:
+        '200':
+          description: Listados Correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoListarEstudiantes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /categories/list:
+    get:
+      tags:
+        - "categories"
+      summary: Lista todas las categorías
+      description: Lista todas las categorías
       responses:
         '200':
           description: Listados Correctamente

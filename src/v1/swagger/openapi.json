@@ -3,18 +3,42 @@
   "info": {
     "title": "API REST con Node JS",
     "description": "Documentación de API REST con Node JS",
+    "version": "1.0.0",
     "contact": {
       "name": "JV Developer",
       "email": "jv@email.com"
-    },
-    "version": "1.0.0"
+    }
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api/students"
-    },
-    {
-      "url": "http://localhost:3000/api/categories"
+      "url": "http://{username}:{port}/api/{basePath}",
+      "description": "NodeJS",
+      "variables": {
+        "username": {
+          "default": "localhost",
+          "description": "Development server, Staging server, Production server example.com",
+          "enum": [
+            "localhost",
+            "development",
+            "staging",
+            "api"
+          ]
+        },
+        "port": {
+          "default": "3000",
+          "enum": [
+            "3000",
+            "3001"
+          ]
+        },
+        "basePath": {
+          "default": "v1",
+          "enum": [
+            "v1",
+            "v2"
+          ]
+        }
+      }
     }
   ],
   "tags": [
@@ -23,12 +47,12 @@
       "description": "CRUD de estudiantes"
     },
     {
-      "name": "categories",
+      "name": "categorias",
       "description": "CRUD de categorías"
     }
   ],
   "paths": {
-    "/listar": {
+    "/students/listar": {
       "get": {
         "tags": [
           "estudiantes"
@@ -61,7 +85,7 @@
         }
       }
     },
-    "/registrar": {
+    "/students/registrar": {
       "post": {
         "tags": [
           "estudiantes"
@@ -105,7 +129,7 @@
         }
       }
     },
-    "/{id}": {
+    "/students/{id}": {
       "get": {
         "tags": [
           "estudiantes"
@@ -220,6 +244,39 @@
             "description": "El id del estudiante"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Listados Correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoListarEstudiantes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/categories/list": {
+      "get": {
+        "tags": [
+          "categorias"
+        ],
+        "summary": "Lista todas las categorías",
+        "description": "Lista todas las categorías",
         "responses": {
           "200": {
             "description": "Listados Correctamente",
