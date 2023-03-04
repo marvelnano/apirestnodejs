@@ -15,7 +15,8 @@ const studentController = require('../controllers/student.controller');
  *                  description: Listados Correctamente
  */
 module.exports = () => {
-    router.get('/', studentController.getIndex);    
+    router.get('/', studentController.getIndex);   
+    router.post('/login', studentController.login);  
     router.get('/listar', studentController.getStudents);
     router.get('/:id', studentController.getStudentById);
     router.post('/registrar', studentController.createStudent);
