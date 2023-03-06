@@ -35,6 +35,34 @@ tags:
   - name: categorias
     description: CRUD de categorías
 paths:
+  /students/login:
+    post:
+      tags:
+        - estudiantes
+      summary: Genera un nuevo token si se loguea correctamente
+      description: Create a new student
+      operationId: generateToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Listados Correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoGenerarToken'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
   /students/listar:
     get:
       tags:
@@ -56,6 +84,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+      security:
+        - api_key: []
   /students/registrar:
     post:
       tags:
@@ -84,6 +114,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+      security:
+        - api_key: []
   /students/{id}:
     get:
       tags:
@@ -113,6 +145,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+      security:
+        - api_key: []
     put:
       tags:
         - estudiantes
@@ -147,6 +181,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+      security:
+        - api_key: []
     delete:
       tags:
         - estudiantes
@@ -175,6 +211,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+      security:
+        - api_key: []
   /categories/list:
     get:
       tags:
@@ -209,6 +247,21 @@ components:
     ServerError:
       description: (ServerError) Error en el servidor
   schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id de usuario
+        name:
+          type: string
+          description: nombre de usuario
+      required:
+        - id
+        - name
+      example:
+        id: 1
+        name: user
     Student:
       type: object
       properties:
@@ -228,7 +281,45 @@ components:
       example:
         name: Kalef
         age: 10
-        enroll: 'true'     
+        enroll: 'true'
+    ExitoGenerarToken:
+      type: object
+      properties:
+        codigoError:
+          type: string
+          enum:
+            - '000'
+          description: Código de error al generar token
+        descripcion:
+          type: string
+          enum:
+            - Token generado
+          description: Descripción del servicio
+        tipoToken:
+          type: string
+          enum:
+            - Bearer
+          description: Tipo de token
+        tokenAcceso:
+          type: string
+          enum:
+            - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+          description: Token generado si usuario se loguea
+        fechaCreacion:
+          type: string
+          enum:
+            - 6/3/2023, 09:26:00
+          description: Fecha de creación del token
+        fechaExpiracion:
+          type: string
+          enum:
+            - 6/3/2023, 09:28:00
+          description: Fecha de expiración del token
+        duracionToken:
+          type: string
+          enum:
+            - 2 min
+          description: Tiempo en minutos que dura el token
     ExitoListarEstudiantes:
       type: object
       properties:
@@ -280,3 +371,8 @@ components:
           enum:
             - 'true'
           description: estado del estudiante
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
