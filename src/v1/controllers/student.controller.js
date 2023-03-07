@@ -17,9 +17,7 @@ exports.getIndex = (req, res) => {
 
 exports.login = (req, res) => {
     const body = req.body;
-    const { id: sub, name } = usuario; 
-    const fechaInicio = new Date();
-    const fechaFin = new Date(Date.now() + config.TIME_EXEC_TOKEN * 1000);
+    const { id: sub, name } = usuario;
     
     if (body.id != usuario["id"] || body.name != usuario["name"]){
         res.status(401);
@@ -31,6 +29,9 @@ exports.login = (req, res) => {
         name,
         exp: Date.now() + 120 * 1000
     },config.SECRET);
+
+    const fechaInicio = new Date();
+    const fechaFin = new Date(Date.now() + config.TIME_EXEC_TOKEN * 1000);
 
     const resultLogin = { 
         codigoError: "000", descripcion: "Token generado", 

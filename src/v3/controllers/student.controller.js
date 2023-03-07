@@ -9,8 +9,6 @@ exports.getIndex = (req, res) => {
 exports.login = (req, res) => {
   const body = req.body;
   const usuario = { id: body.id, name: body.name };
-  const fechaInicio = new Date();
-  const fechaFin = new Date(Date.now() + config.TIME_EXEC_TOKEN * 1000);
 
   const sql = "SELECT * FROM usuario WHERE id=? AND name=?;";
   pool.query(sql, [body.id, body.name], (err, result, fields) => {
@@ -34,6 +32,9 @@ exports.login = (req, res) => {
       },
       config.SECRET
     );
+    
+    const fechaInicio = new Date();
+    const fechaFin = new Date(Date.now() + config.TIME_EXEC_TOKEN * 1000);
 
     const resultLogin = { 
       codigoError: "000", descripcion: "Token generado", 
