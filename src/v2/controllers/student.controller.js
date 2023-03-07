@@ -41,6 +41,9 @@ exports.login = (req, res) => {
 exports.getStudents = (req, res) => {
     try{
         // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        if (!req.headers.authorization) {
+            return res.status(400).send({ error: "token no ingresado" });
+        }
         const token = req.headers.authorization.split(" ")[1];
         const payload = jwt.verify(token, config.SECRET);        
 
@@ -58,6 +61,9 @@ exports.getStudents = (req, res) => {
 exports.getStudentById = (req, res) => {
     try{
         // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        if (!req.headers.authorization) {
+            return res.status(400).send({ error: "token no ingresado" });
+        }
         const token = req.headers.authorization.split(" ")[1];
         const payload = jwt.verify(token, config.SECRET);        
 
@@ -77,6 +83,9 @@ exports.getStudentById = (req, res) => {
 exports.createStudent = (req, res) => {
     try{
         // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        if (!req.headers.authorization) {
+            return res.status(400).send({ error: "token no ingresado" });
+        }
         const token = req.headers.authorization.split(" ")[1];
         const payload = jwt.verify(token, config.SECRET);        
 
@@ -102,6 +111,9 @@ exports.createStudent = (req, res) => {
 exports.updateStudent = (req, res) => {
     try{
         // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        if (!req.headers.authorization) {
+            return res.status(400).send({ error: "token no ingresado" });
+        }
         const token = req.headers.authorization.split(" ")[1];
         const payload = jwt.verify(token, config.SECRET);        
 
@@ -142,6 +154,9 @@ exports.updateStudent = (req, res) => {
 exports.deleteStudentById = (req, res) => {
     try{
         // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        if (!req.headers.authorization) {
+            return res.status(400).send({ error: "token no ingresado" });
+        }
         const token = req.headers.authorization.split(" ")[1];
         const payload = jwt.verify(token, config.SECRET);        
 

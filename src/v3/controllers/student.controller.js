@@ -19,7 +19,10 @@ exports.login = (req, res) => {
 
     if (result.length <= 0) {
       res.status(401);
-      return res.json({ codigoError: "401", descripcion: "Datos de usuario son inválidos" });
+      return res.json({
+        codigoError: "401",
+        descripcion: "Datos de usuario son inválidos",
+      });
     }
 
     // * proceso para generar token si usuario se loguea correctamente
@@ -32,29 +35,34 @@ exports.login = (req, res) => {
       },
       config.SECRET
     );
-    
+
     const fechaInicio = new Date();
     const fechaFin = new Date(Date.now() + config.TIME_EXEC_TOKEN * 1000);
 
-    const resultLogin = { 
-      codigoError: "000", descripcion: "Token generado", 
-      tipoToken: "Bearer", tokenAcceso: token, 
+    const resultLogin = {
+      codigoError: "000",
+      descripcion: "Token generado",
+      tipoToken: "Bearer",
+      tokenAcceso: token,
       fechaCreacion: fechaInicio.toLocaleString(),
       fechaExpiracion: fechaFin.toLocaleString(),
-      duracionToken: config.TIME_EXEC_TOKEN/60+' min'
+      duracionToken: config.TIME_EXEC_TOKEN / 60 + " min",
     };
     res.send(resultLogin);
   });
 };
 
 exports.getStudents = (req, res) => {
-  try{
+  try {
     // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    if (!req.headers.authorization) {
+      return res.status(400).send({ error: "token no ingresado" });
+    }
     const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, config.SECRET);        
+    const payload = jwt.verify(token, config.SECRET);
 
-    if( Date.now() > payload.exp ){
-        return res.status(401).send({error: "token expired"})
+    if (Date.now() > payload.exp) {
+      return res.status(401).send({ error: "token expired" });
     }
 
     // * proceso para listar todos los estudiantes
@@ -66,20 +74,23 @@ exports.getStudents = (req, res) => {
       }
       res.json(result);
     });
-  } catch (error){
-      res.status(401).send({error: error.message})
-  }  
+  } catch (error) {
+    res.status(401).send({ error: error.message });
+  }
 };
 
 exports.getStudentById = (req, res) => {
-  try{
+  try {
     // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    if (!req.headers.authorization) {
+      return res.status(400).send({ error: "token no ingresado" });
+    }
     const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, config.SECRET);        
+    const payload = jwt.verify(token, config.SECRET);
 
-    if( Date.now() > payload.exp ){
-        return res.status(401).send({error: "token expired"})
-    }  
+    if (Date.now() > payload.exp) {
+      return res.status(401).send({ error: "token expired" });
+    }
 
     // * proceso de buscar estudiante por id
     const ID = req.params.id;
@@ -92,21 +103,24 @@ exports.getStudentById = (req, res) => {
       }
       res.json(result);
     });
-  } catch (error){
-      res.status(401).send({error: error.message})
+  } catch (error) {
+    res.status(401).send({ error: error.message });
   }
 };
 
 exports.createStudent = (req, res) => {
-  try{
+  try {
     // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    if (!req.headers.authorization) {
+      return res.status(400).send({ error: "token no ingresado" });
+    }
     const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, config.SECRET);        
+    const payload = jwt.verify(token, config.SECRET);
 
-    if( Date.now() > payload.exp ){
-        return res.status(401).send({error: "token expired"})
-    }  
-    
+    if (Date.now() > payload.exp) {
+      return res.status(401).send({ error: "token expired" });
+    }
+
     // * proceso para crear estudiante
     const values = Object.values(req.body);
 
@@ -118,21 +132,24 @@ exports.createStudent = (req, res) => {
       }
       res.json({ message: "Nuevo estudiante agregado" });
     });
-  } catch (error){
-      res.status(401).send({error: error.message})
+  } catch (error) {
+    res.status(401).send({ error: error.message });
   }
 };
 
 exports.updateStudent = (req, res) => {
-  try{
+  try {
     // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    if (!req.headers.authorization) {
+      return res.status(400).send({ error: "token no ingresado" });
+    }
     const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, config.SECRET);        
+    const payload = jwt.verify(token, config.SECRET);
 
-    if( Date.now() > payload.exp ){
-        return res.status(401).send({error: "token expired"})
-    }  
-    
+    if (Date.now() > payload.exp) {
+      return res.status(401).send({ error: "token expired" });
+    }
+
     // * proceso de actualizar estudiante
     const values = Object.values(req.body);
     const ID = req.params.id;
@@ -145,21 +162,24 @@ exports.updateStudent = (req, res) => {
       }
       res.json({ message: "Estudiante actualizado" });
     });
-  } catch (error){
-      res.status(401).send({error: error.message})
+  } catch (error) {
+    res.status(401).send({ error: error.message });
   }
 };
 
 exports.deleteStudentById = (req, res) => {
-  try{
+  try {
     // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    if (!req.headers.authorization) {
+      return res.status(400).send({ error: "token no ingresado" });
+    }
     const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, config.SECRET);        
+    const payload = jwt.verify(token, config.SECRET);
 
-    if( Date.now() > payload.exp ){
-        return res.status(401).send({error: "token expired"})
-    }  
-    
+    if (Date.now() > payload.exp) {
+      return res.status(401).send({ error: "token expired" });
+    }
+
     // * proceso de eliminar estudiante
     const ID = req.params.id;
 
@@ -171,7 +191,7 @@ exports.deleteStudentById = (req, res) => {
       }
       res.json({ message: "Un estudiante eliminado" });
     });
-  } catch (error){
-      res.status(401).send({error: error.message})
+  } catch (error) {
+    res.status(401).send({ error: error.message });
   }
 };

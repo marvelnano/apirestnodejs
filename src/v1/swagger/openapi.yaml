@@ -40,7 +40,7 @@ paths:
       tags:
         - estudiantes
       summary: Genera un nuevo token si se loguea correctamente
-      description: Create a new student
+      description: Genera un nuevo token
       operationId: generateToken
       requestBody:
         content:
@@ -50,7 +50,7 @@ paths:
         required: true
       responses:
         '200':
-          description: Listados Correctamente
+          description: Token Generado Correctamente
           content:
             application/json:
               schema:
@@ -71,7 +71,7 @@ paths:
       description: Lista todos los estudiantes
       responses:
         '200':
-          description: Listados Correctamente
+          description: Estudiantes Listados Correctamente
           content:
             application/json:
               schema:
@@ -91,7 +91,7 @@ paths:
       tags:
         - estudiantes
       summary: Registra nuevo estudiante
-      description: Create a new student
+      description: Registra nuevo estudiante
       operationId: addStudent
       requestBody:
         content:
@@ -101,7 +101,7 @@ paths:
         required: true
       responses:
         '200':
-          description: Listados Correctamente
+          description: Estudiante Registrado Correctamente
           content:
             application/json:
               schema:
@@ -132,7 +132,7 @@ paths:
           description: El id del estudiante
       responses:
         '200':
-          description: Listados Correctamente
+          description: Estudiante Encontrado Correctamente
           content:
             application/json:
               schema:
@@ -168,7 +168,7 @@ paths:
         required: true
       responses:
         '200':
-          description: Listados Correctamente
+          description: Estudiante Actualizado Correctamente
           content:
             application/json:
               schema:
@@ -198,7 +198,7 @@ paths:
           description: El id del estudiante
       responses:
         '200':
-          description: Listados Correctamente
+          description: Estudiante Eliminado Correctamente
           content:
             application/json:
               schema:
