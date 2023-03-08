@@ -1,37 +1,10 @@
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const config = require('./config');
-const routeStudents = require(`./${config.VERSION}/routes/students`);
-const { swaggerDocs: SwaggerDocs } = require(`./${config.VERSION}/swagger/swaggerV2`);
+const app = require('./app');
 
-// * Servidor
-const app = express();
+const main=()=>{
+    app.param.listen(app.param.get('port'), () => {
+        console.log(`Escuchando en puerto ${app.param.get('port')}...`);
+        app.SwaggerDocs(app.param, app.param.get('port'), app.param.get('host'), app.config.VERSION);
+    });
+}
 
-// * Settings
-app.set('port', config.PORT);
-app.set('host', config.HOST);
-app.set('json spaces', 2);
-
-// * Middlewares
-app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-//var whitelist = ['https://editor.swagger.io/', 'http://example2.com']
-app.use(cors());
-
-// * Rutas del app
-app.get('/', (req, res) => {
-    res.send('<h2 style="text-align:center">Bienvenido al Api Rest con Node JS</h2>');
-});
-
-
-console.log(`NODE_ENV = ${config.NODE_ENV}`);
-
-app.use(`/api/${config.VERSION}/students`, routeStudents());
-
-app.listen(app.get('port'), () => {
-    console.log(`Escuchando en puerto ${app.get('port')}...`);
-    SwaggerDocs(app, app.get('port'), app.get('host'), config.VERSION);
-});
+main();
