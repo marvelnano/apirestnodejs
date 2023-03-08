@@ -1,0 +1,34 @@
+
+POST http://localhost:3000/api/v1/students/registrar
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJqb3NlIiwiZXhwIjoxNjc4MzE3NzE0OTE3LCJpYXQiOjE2NzgzMTc1OTR9.b7MuBdQtj8mQXAuMsKnoUnqx39nSkiwdZRXDEJQoFuk
+
+{
+    "name": "gael",
+    "age": 3,
+    "enroll": "true"
+}
+
+###
+
+POST http://localhost:3000/api/v2/students/registrar
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJqb3NlIiwiZXhwIjoxNjc4MzE1NTAyMjA3LCJpYXQiOjE2NzgzMTUzODJ9.H-sGhBmUgYBMaaHU4FqX3FvdVW9rA1ErF6ySpRQuT38
+
+{
+    "name": "gael",
+    "age": 3,
+    "enroll": "true"
+}
+
+###
+
+POST http://localhost:3000/api/v3/students/registrar
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJqb3NlIiwiZXhwIjoxNjc4MzE1NTAyMjA3LCJpYXQiOjE2NzgzMTUzODJ9.H-sGhBmUgYBMaaHU4FqX3FvdVW9rA1ErF6ySpRQuT38
+
+{
+    "name": "gael",
+    "age": 3,
+    "enroll": "true"
+}

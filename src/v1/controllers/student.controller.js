@@ -75,7 +75,7 @@ exports.getStudentById = (req, res) => {
   try {
     // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     if (!req.headers.authorization) {
-        return res.status(400).send({ error: "token no ingresado" });
+      return res.status(400).send({ error: "token no ingresado" });
     }
     const token = req.headers.authorization.split(" ")[1];
     const payload = jwt.verify(token, config.SECRET);
@@ -97,7 +97,7 @@ exports.createStudent = (req, res) => {
   try {
     // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     if (!req.headers.authorization) {
-        return res.status(400).send({ error: "token no ingresado" });
+      return res.status(400).send({ error: "token no ingresado" });
     }
     const token = req.headers.authorization.split(" ")[1];
     const payload = jwt.verify(token, config.SECRET);
@@ -107,8 +107,11 @@ exports.createStudent = (req, res) => {
     }
 
     // * proceso para crear estudiante
+    const ids = students.map((student) => student.id);
+    const maxId = Math.max(...ids);
+
     const student = {
-      id: students.length + 1,
+      id: maxId + 1,
       name: req.body.name,
       age: parseInt(req.body.age),
       enroll: req.body.enroll === "true",
@@ -125,7 +128,7 @@ exports.updateStudent = (req, res) => {
   try {
     // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     if (!req.headers.authorization) {
-        return res.status(400).send({ error: "token no ingresado" });
+      return res.status(400).send({ error: "token no ingresado" });
     }
     const token = req.headers.authorization.split(" ")[1];
     const payload = jwt.verify(token, config.SECRET);
@@ -168,7 +171,7 @@ exports.deleteStudentById = (req, res) => {
   try {
     // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
     if (!req.headers.authorization) {
-        return res.status(400).send({ error: "token no ingresado" });
+      return res.status(400).send({ error: "token no ingresado" });
     }
     const token = req.headers.authorization.split(" ")[1];
     const payload = jwt.verify(token, config.SECRET);

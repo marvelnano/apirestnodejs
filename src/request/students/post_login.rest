@@ -1,0 +1,58 @@
+#Usuario correcto
+POST http://localhost:3000/api/v1/students/login
+content-type: application/json
+
+{
+    "id": 1,
+    "name": "jose"
+}
+
+###
+POST http://localhost:3000/api/v2/students/login
+content-type: application/json
+
+{
+    "id": 1,
+    "name": "jose"
+}
+
+###
+
+POST http://localhost:3000/api/v3/students/login
+content-type: application/json
+
+{
+    "id": 1,
+    "name": "jose"
+}
+
+###
+
+#Usuario incorrecto
+POST http://localhost:3000/api/v1/students/login
+content-type: application/json
+
+{
+    "id": 1,
+    "name": "user"
+}
+
+###
+
+POST http://localhost:3000/api/v2/students/login
+content-type: application/json
+
+{
+    "id": 1,
+    "name": "user"
+}
+
+###
+
+POST http://localhost:3000/api/v3/students/login
+content-type: application/json
+
+{
+    "id": 1,
+    "name": "user"
+}

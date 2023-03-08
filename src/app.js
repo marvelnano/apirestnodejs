@@ -26,7 +26,6 @@ app.get('/', (req, res) => {
     res.send('<h2 style="text-align:center">Bienvenido al Api Rest con Node JS</h2>');
 });
 
-console.log(`NODE_ENV = ${config.NODE_ENV}`);
 app.use(`/api/${config.VERSION}/students`, routeStudents());
 
 module.exports = {
