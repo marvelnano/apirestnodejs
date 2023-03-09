@@ -31,15 +31,17 @@ app.get('/', (req, res) => {
 
 app.use(`/api/${config.VERSION}/students`, routeStudents());
 
+/* 
+*muestra error 404 si no encuentra ruta de api
 app.use((req, res) => {
     console.log('ruta no identificada: '+req.path);
     res.status(404).json({
         error: 'Not found'
     });
-})
+})*/
 
 module.exports = {
-    param: app,
+    app: app,
     config: config,
     SwaggerDocs: SwaggerDocs
 }

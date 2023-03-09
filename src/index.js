@@ -1,10 +1,10 @@
-const app = require('./app');
+const { app, config, SwaggerDocs } = require('./app');
 
 const main=()=>{
-    app.param.listen(app.param.get('port'), () => {
-        console.log(`NODE_ENV = ${app.config.NODE_ENV}`);
-        console.log(`Escuchando en puerto ${app.param.get('port')}...`);
-        app.SwaggerDocs(app.param, app.param.get('port'), app.param.get('host'), app.config.VERSION);
+    app.listen(app.get('port'), () => {
+        console.log(`NODE_ENV = ${config.NODE_ENV}`);
+        console.log(`Escuchando en puerto ${app.get('port')}...`);
+        SwaggerDocs(app, app.get('port'), app.get('host'), config.VERSION);
     });
 }
 
