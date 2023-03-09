@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const config = require('./config');
-const logger = require('./loggerMiddleware');
+const { logger, logger404 } = require('./loggerMiddleware');
 const routeStudents = require(`./${config.VERSION}/routes/students`);
 const { swaggerDocs: SwaggerDocs } = require(`./${config.VERSION}/swagger/swaggerV2`);
 
@@ -30,18 +30,12 @@ app.get('/', (req, res) => {
 });
 
 app.use(`/api/${config.VERSION}/students`, routeStudents());
+SwaggerDocs(app, app.get('port'), app.get('host'), config.VERSION);
 
-/* 
-*muestra error 404 si no encuentra ruta de api
-app.use((req, res) => {
-    console.log('ruta no identificada: '+req.path);
-    res.status(404).json({
-        error: 'Not found'
-    });
-})*/
+// *Middleware para manejar errores 404
+// app.use(logger404);
 
 module.exports = {
     app: app,
-    config: config,
-    SwaggerDocs: SwaggerDocs
+    config: config
 }
