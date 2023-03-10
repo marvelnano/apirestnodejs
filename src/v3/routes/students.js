@@ -1,13 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express();
 
-const studentController = require('../controllers/student.controller');
+const studentController = require("../controllers/student.controller");
+const { authenticateUser } = require("../../middleware/authMiddleware");
+const { errorSubRuta } = require('../../middleware/errorMiddleware');
 
 /**
  * @openapi
  * /students/login:
  *      post:
- *          tags: 
+ *          tags:
  *              - Estudiantes
  *          summary: "Genera un nuevo token si se loguea correctamente"
  *          requestBody:
@@ -36,7 +38,7 @@ const studentController = require('../controllers/student.controller');
  * @openapi
  *  /students/listar:
  *      get:
- *          tags: 
+ *          tags:
  *              - Estudiantes
  *          summary: "Lista todos los estudiantes"
  *          responses:
@@ -58,13 +60,15 @@ const studentController = require('../controllers/student.controller');
  *              - api_key: []
  */
 module.exports = () => {
-    router.get('/', studentController.getIndex);   
-    router.post('/login', studentController.login);  
-    router.get('/listar', studentController.getStudents);
-    router.get('/:id', studentController.getStudentById);
-    router.post('/registrar', studentController.createStudent);
-    router.put('/:id', studentController.updateStudent);
-    router.delete('/:id', studentController.deleteStudentById);
+  router.get("/", studentController.getIndex);
+  router.post("/login", studentController.login);
+  router.get("/listar", authenticateUser, studentController.getStudents);
+  router.get("/:id", authenticateUser, studentController.getStudentById);
+  router.post("/registrar", authenticateUser, studentController.createStudent);
+  router.put("/:id", authenticateUser, studentController.updateStudent);
+  router.delete("/:id", authenticateUser, studentController.deleteStudentById);
+  // Ruta de comodín para manejar subrutas no definidas
+  router.use('*', errorSubRuta, (req, res) => { });
 
-    return router;
-}
+  return router;
+};

@@ -1,7 +1,7 @@
 
-PUT http://localhost:3000/api/v1/students/7
+PUT http://localhost:3000/api/v1/students/4
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJqb3NlIiwiZXhwIjoxNjc4MzE1NjYwODE4LCJpYXQiOjE2NzgzMTU1NDB9.yJWK5fUP8LWOVREsHNx8qgBlAybXedFZlKBa8ZLFN34
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJqb3NlIiwiZXhwIjoxNjc4NDY0MTEzMjgwLCJpYXQiOjE2Nzg0NjM5OTN9.OctFQf2F3Qf5ZQfRBeNeLSND3HMIj5wF7XaGe2p5MAQ
 
 {
     "name": "gael alex",

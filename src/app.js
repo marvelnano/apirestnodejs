@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const config = require('./config');
-const { logger, logger404 } = require('./loggerMiddleware');
+const { logger, errorRuta } = require('./middleware/errorMiddleware');
 const routeStudents = require(`./${config.VERSION}/routes/students`);
 const { swaggerDocs: SwaggerDocs } = require(`./${config.VERSION}/swagger/swaggerV2`);
 
@@ -33,7 +33,7 @@ SwaggerDocs(app, app.get('port'), app.get('host'), config.VERSION);
 app.use(`/api/${config.VERSION}/students`, routeStudents());
 
 // *Middleware para manejar errores 404
-app.use(logger404);
+app.use(errorRuta);
 
 module.exports = {
     app: app,

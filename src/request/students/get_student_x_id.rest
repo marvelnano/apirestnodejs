@@ -1,7 +1,7 @@
 
 GET http://localhost:3000/api/v1/students/2
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJqb3NlIiwiZXhwIjoxNjc4MzE1MjI3MDEzLCJpYXQiOjE2NzgzMTUxMDd9.BunOLfRTfVaJVDwhbTea6jptqTlSgUkPQeLk9vWYzYs
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJqb3NlIiwiZXhwIjoxNjc4NDYzOTUyNzUwLCJpYXQiOjE2Nzg0NjM4MzJ9.N6o1GM6JpTSUIH0Gk19MtzKItaFktL5UF8XMIR4ehfU
 
 ###
 

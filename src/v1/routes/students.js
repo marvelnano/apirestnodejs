@@ -2,6 +2,8 @@ const express = require('express');
 const router = express();
 
 const studentController = require('../controllers/student.controller');
+const { authenticateUser } = require('../../middleware/authMiddleware');
+const { errorSubRuta } = require('../../middleware/errorMiddleware');
 
 /**
  * @openapi
@@ -60,11 +62,13 @@ const studentController = require('../controllers/student.controller');
 module.exports = () => {
     router.get('/', studentController.getIndex); 
     router.post('/login', studentController.login);   
-    router.get('/listar', studentController.getStudents);
-    router.get('/:id', studentController.getStudentById);
-    router.post('/registrar', studentController.createStudent);
-    router.put('/:id', studentController.updateStudent);
-    router.delete('/:id', studentController.deleteStudentById);
+    router.get('/listar', authenticateUser, studentController.getStudents);
+    router.get('/:id', authenticateUser, studentController.getStudentById);
+    router.post('/registrar', authenticateUser, studentController.createStudent);
+    router.put('/:id', authenticateUser, studentController.updateStudent);
+    router.delete('/:id', authenticateUser, studentController.deleteStudentById);
+    // Ruta de comodín para manejar subrutas no definidas
+    router.use('*', errorSubRuta, (req, res) => { });
 
     return router;
 }

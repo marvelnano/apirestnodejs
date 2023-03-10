@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const config = require("../../config");
+const jwt = require('jsonwebtoken');
+const config = require('../../config');
 
 // nota: students son datos que podrían traerse de una db
 const students = [
@@ -53,17 +53,6 @@ exports.login = (req, res) => {
 
 exports.getStudents = (req, res) => {
   try {
-    // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-    if (!req.headers.authorization) {
-      return res.status(400).send({ error: "token no ingresado" });
-    }
-    const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, config.SECRET);
-
-    if (Date.now() > payload.exp) {
-      return res.status(401).send({ error: "token expired" });
-    }
-
     // * proceso para listar todos los estudiantes
     res.send(students);
   } catch (error) {
@@ -73,17 +62,6 @@ exports.getStudents = (req, res) => {
 
 exports.getStudentById = (req, res) => {
   try {
-    // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-    if (!req.headers.authorization) {
-      return res.status(400).send({ error: "token no ingresado" });
-    }
-    const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, config.SECRET);
-
-    if (Date.now() > payload.exp) {
-      return res.status(401).send({ error: "token expired" });
-    }
-
     // * proceso de buscar estudiante por id
     const student = students.find((c) => c.id === parseInt(req.params.id));
     if (!student) return res.status(404).send("Estudiante no encontrado");
@@ -95,17 +73,6 @@ exports.getStudentById = (req, res) => {
 
 exports.createStudent = (req, res) => {
   try {
-    // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-    if (!req.headers.authorization) {
-      return res.status(400).send({ error: "token no ingresado" });
-    }
-    const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, config.SECRET);
-
-    if (Date.now() > payload.exp) {
-      return res.status(401).send({ error: "token expired" });
-    }
-
     // * proceso para crear estudiante
     const ids = students.map((student) => student.id);
     const maxId = Math.max(...ids);
@@ -126,33 +93,23 @@ exports.createStudent = (req, res) => {
 
 exports.updateStudent = (req, res) => {
   try {
-    // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-    if (!req.headers.authorization) {
-      return res.status(400).send({ error: "token no ingresado" });
-    }
-    const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, config.SECRET);
-
-    if (Date.now() > payload.exp) {
-      return res.status(401).send({ error: "token expired" });
-    }
-
     // * proceso de actualizar estudiante
     const student = students.find((c) => c.id === parseInt(req.params.id));
     if (!student) return res.status(404).send("Estudiante no encontrado");
 
     // nota: actualiza elemento y muestra todos los elementos
     /*const updateStudent = students.map(p =>
-            p.id === parseInt(req.params.id)
-                ? {
-                    id: parseInt(req.params.id),
-                    name: req.body.name,
-                    age: parseInt(req.body.age),
-                    enroll: req.body.enroll
-                }
-                : p
-        );
-        res.send(updateStudent);*/
+      p.id === parseInt(req.params.id)
+        ? {
+            id: parseInt(req.params.id),
+            name: req.body.name,
+            age: parseInt(req.body.age),
+            enroll: req.body.enroll
+        }
+        : p
+      );
+      res.send(updateStudent);
+    */
 
     //nota: actualiza elemento y muestra elemento modificado
     const index = students.indexOf(student);
@@ -169,17 +126,6 @@ exports.updateStudent = (req, res) => {
 
 exports.deleteStudentById = (req, res) => {
   try {
-    // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-    if (!req.headers.authorization) {
-      return res.status(400).send({ error: "token no ingresado" });
-    }
-    const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, config.SECRET);
-
-    if (Date.now() > payload.exp) {
-      return res.status(401).send({ error: "token expired" });
-    }
-
     // * proceso de eliminar estudiante
     const student = students.find((c) => c.id === parseInt(req.params.id));
     if (!student) return res.status(404).send("Estudiante no encontrado");

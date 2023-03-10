@@ -1,7 +1,7 @@
 
 POST http://localhost:3000/api/v1/students/registrar
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJqb3NlIiwiZXhwIjoxNjc4MzE3NzE0OTE3LCJpYXQiOjE2NzgzMTc1OTR9.b7MuBdQtj8mQXAuMsKnoUnqx39nSkiwdZRXDEJQoFuk
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJqb3NlIiwiZXhwIjoxNjc4NDY3Nzk4MjE4LCJpYXQiOjE2Nzg0Njc2Nzh9.2JksMfyNAO07Fd07hHpVeMRj9e2cpiiT9TeGGbiXymk
 
 {
     "name": "gael",
