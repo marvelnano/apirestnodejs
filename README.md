@@ -55,7 +55,7 @@ _Luego abrir terminal y en powershell o cmd instalar dependencias_
 npm install
 ```
 
-_Crear archivos env_
+_Crear archivos env_ en la ruta **src/**
 
 ```
 development.env

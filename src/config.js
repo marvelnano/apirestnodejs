@@ -9,7 +9,7 @@ module.exports = {
     NODE_ENV: process.env.NODE_ENV || 'development',
     HOST: process.env.HOST || '127.0.0.1',
     PORT: process.env.PORT || 3000,
-    VERSION: 'v3',
+    VERSION: 'v1',
     SECRET: process.env.SECRET || 'this-is-other-secret',
     TIME_EXEC_TOKEN: process.env.TIME_EXEC_TOKEN || 60,
 
