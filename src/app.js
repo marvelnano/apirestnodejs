@@ -33,7 +33,7 @@ SwaggerDocs(app, app.get('port'), app.get('host'), config.VERSION);
 app.use(`/api/${config.VERSION}/students`, routeStudents());
 
 // *Middleware para manejar errores 404
-// app.use(logger404);
+app.use(logger404);
 
 module.exports = {
     app: app,
