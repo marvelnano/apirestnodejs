@@ -1,6 +1,6 @@
 # Api Rest Full con NodeJS
 
-_Este proyecto esta desarrollado con node v16.18.0, utiliza JWT para agregar seguridad, para consultar cada endpoint hay que agregar el token generado al loguearse; para tratar de abarcar todos losposibles ejemplos tenemos 3 versiones:_
+_Este proyecto esta desarrollado con node v16.18.0, utiliza JWT para agregar seguridad, para consultar cada endpoint hay que agregar el token generado al loguearse; para tratar de abarcar todos los posibles ejemplos tenemos 3 versiones:_
 * La v1 que obtiene la data de un array dentro del controlador students.
 * La v2 que obtiene la data de un archivo json, ubicado en: **src/v2/database/db.json** .
 * La v3 que obtiene la data de una base de datos mysql.
