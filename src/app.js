@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
     res.send('<h2 style="text-align:center">Bienvenido al Api Rest con Node JS</h2>');
 });
 
-app.use(`/api/${config.VERSION}/students`, routeStudents());
 SwaggerDocs(app, app.get('port'), app.get('host'), config.VERSION);
+app.use(`/api/${config.VERSION}/students`, routeStudents());
 
 // *Middleware para manejar errores 404
 // app.use(logger404);

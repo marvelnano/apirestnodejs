@@ -19,6 +19,18 @@ const swaggerDocs = (app, port, host, version) => {
         res.send(swaggerSpec)
     });
 
+    /*app.use(function(req, res, next) {
+        // Verificar si la ruta solicitada existe en la especificación de Swagger
+        console.log('path: '+req.url);
+        if (swaggerDocument.paths[req.url] !== '/api-docs') {
+          // Si la ruta no existe en Swagger, enviar una respuesta con código de estado 404
+          res.status(404).send('No se pudo encontrar la página solicitada.');
+        } else {
+          // Si la ruta existe en Swagger, continuar con la siguiente función middleware
+          next();
+        }
+    }); */
+
     console.log(`Version ${version} Docs are available at http://${host}:${port}/api-docs/`);
 };
 
