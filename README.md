@@ -36,7 +36,7 @@ Better Comments
 * Tener instalado nodejs(este proyecto esta desarrollado en v16.18.0), para saber versión de nodejs, abrir terminal y ejecutar:
 
 ```
-node -v
+$ node -v
 ```
 
 ### Instalación 🔧
@@ -46,13 +46,13 @@ _Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener 
 * Abrir terminal bash de VSCode para clonar repositorio de github.
 
 ```
-git clone https://github.com/marvelnano/apirestnodejs.git
+$ git clone https://github.com/marvelnano/apirestnodejs.git
 ```
 
 _Luego abrir terminal y en powershell o cmd instalar dependencias_
 
 ```
-npm install
+$ npm install
 ```
 
 _Crear archivos env_ en la ruta **src/**
