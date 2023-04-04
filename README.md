@@ -95,6 +95,15 @@ VERSION: 'v3'
 
 ## Ejecutando las pruebas ⚙️
 
+_Explica como ejecutar las pruebas de manera local_
+
+### Realizar las pruebas de forma local 🔩
+
+* en la consola del proyecto escribir:
+```
+npm run dev
+```
+
 _Explica como ejecutar las pruebas automatizadas para este sistema_
 
 ### Analice las pruebas end-to-end 🔩
